@@ -104,6 +104,9 @@ table HandshakeAck {
 
   // If not accepted, this indicates if the plugin must be updated.
   requires_plugin_update:bool;
+
+  // The active OctoKey
+  octokey:string;
 }
 
 // A message that pops up a notifictaion on the user's OctoPrint UI.
