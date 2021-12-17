@@ -1,5 +1,5 @@
-// The namepspace must start the same as our python package. That's because 
-// we bundle the output direclty with the package. Some of the classes (like WebStreamMgs)
+// The namepspace must start the same as our python package. That's because
+// we bundle the output directly with the package. Some of the classes (like WebStreamMgs)
 // reference the namespace in the generated logic, and it will break if it doesn't match.
 namespace octoprint_octoeverywhere.Proto;
 
@@ -13,7 +13,7 @@ namespace octoprint_octoeverywhere.Proto;
 enum DataCompression:byte { None = 0, Brotli=1 }
 
 // Possible types of paths.
-enum PathTypes:byte { None=0, Relative=1, Absolute=2 } 
+enum PathTypes:byte { None=0, Relative=1, Absolute=2 }
 
 // Possible values of the web socket data type.
 // The ordering is weird to match the websocket standard.
@@ -26,7 +26,7 @@ enum WebSocketDataTypes:byte { Text=1, Binary=2, Close=8, None=126}
 // Error is red
 enum OctoNotificationTypes:byte { Notice=0, Info=1, Success=2, Error=3 }
 
-// Possible message priority types. 
+// Possible message priority types.
 enum MessagePriority:byte { Critical=1, High=5, Normal=10, Low=15, Background=20 }
 
 
@@ -41,7 +41,7 @@ table HttpHeader {
   value:string;
 }
 
-// Represents context for http calls that only needs to be sent on the inital request.
+// Represents context for http calls that only needs to be sent on the initial request.
 table HttpInitialContext {
   // The url path of the request - or - an absolute  URL.
   path:string;
@@ -64,25 +64,25 @@ table HttpInitialContext {
 //
 // Message Context Tables
 //
- 
-// A message that respresents an inital handshake message from the printer to the service.
+
+// A message that represents an initial handshake message from the printer to the service.
 table HandshakeSyn {
   // The unique ID of the printer trying to connect.
   printer_id:string;
 
-  // Indicates if the printer is just visiting this server because it has been summoned. 
+  // Indicates if the printer is just visiting this server because it has been summoned.
   // This happens when a shared connection hits a server the printer isn't connected to,
   // for a short period of time the printer will dual connect to two servers.
   is_primary_connection:bool;
 
-  // The version of the pluign. Matches the github release version.
+  // The version of the plugin. Matches the github release version.
   plugin_version:string;
 
   // If known, this is the local device IP of the OctoPrint device.
   // This is passed to apps so they can more easily discover the printer during setup.
   local_device_ip:string;
 
-  // If known, this is the port the lcoal http proxy is running on.
+  // If known, this is the port the local http proxy is running on.
   local_http_proxy_port:uint;
 }
 
@@ -98,7 +98,7 @@ table HandshakeAck {
   // If not accepted, this error indicates why.
   error:string;
 
-  // If not acccpeted, this can optionally indicate how long the client should back off before
+  // If not accepted, this can optionally indicate how long the client should back off before
   // trying to connect again.
   backoff_seconds:ulong;
 
@@ -109,7 +109,7 @@ table HandshakeAck {
   octokey:string;
 }
 
-// A message that pops up a notifictaion on the user's OctoPrint UI.
+// A message that pops up a notification on the user's OctoPrint UI.
 table OctoNotification {
   // Required - the title of the message
   title:string;
@@ -124,10 +124,10 @@ table OctoNotification {
   auto_hide:bool;
 }
 
-// A message that is sent to clients when they are trying to be summoed by another server.
-// The summomn system allows the pritner to be shared with user all around the world fast and seemless.
+// A message that is sent to clients when they are trying to be summoned by another server.
+// The summon system allows the printer to be shared with user all around the world fast and seamless.
 table OctoSummon {
-  // The absolue URL of the server that's requesting a connection.
+  // The absolute URL of the server that's requesting a connection.
   server_connect_url:string;
 }
 
@@ -148,7 +148,7 @@ table WebStreamMsg {
   is_close_msg:bool = false;
   is_data_transmission_done:bool = false;
   is_control_flags_only:bool = true;
-  
+
   // Optional - If set, this value is the full size of the data that will be sent for this stream.
   // Any value < 0 means unset.
   full_stream_data_size:long = -1;
@@ -156,7 +156,7 @@ table WebStreamMsg {
   // The message data.
   data:[uint8];
 
-  // Indicates what type of compression is used 
+  // Indicates what type of compression is used
   data_compression:DataCompression = None;
 
   // Required if using compression - how large the uncompressed data is.
@@ -180,7 +180,7 @@ table WebStreamMsg {
 }
 
 // Holds all possible types of messages.
-union MessageContext 
+union MessageContext
 {
   HandshakeSyn,
   HandshakeAck,
@@ -191,10 +191,10 @@ union MessageContext
 
 // The main, root message
 table OctoStreamMessage {
-  
+
   // The message context holds the main dynamic body of the message.
   context:MessageContext;
 
 }
- 
+
 root_type OctoStreamMessage;
