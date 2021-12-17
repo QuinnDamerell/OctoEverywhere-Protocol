@@ -94,14 +94,6 @@ table HandshakeSyn {
 
   // The key version this client is using and is expecting to use for decryption.
   ras_challenge_version:byte;
-
-  // Indicates that the client supports zlib compression.
-  // By default all clients after 1.4.0 support zlib.
-  compression_support_zlib:bool = true;
-
-  // Indicates that the client supports brotli compresssion.
-  // Brotli is used if possible, otherwise we default to zlib.
-  compression_support_brotli:bool = false;
 }
 
 // A message that's sent in response to the handshake sync. The connection isn't established
