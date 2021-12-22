@@ -57,6 +57,10 @@ table HttpInitialContext {
 
   // Optional - Any http headers in the request.
   headers:[HttpHeader];
+
+  // Optional - A speical flag, if set, the plugin will use the OE app auth key for the request.
+  // Note that some pluigns will never generate an auth key, so this might always fail on them.
+  use_octoeverywhere_auth:bool = false;
 }
 
 
