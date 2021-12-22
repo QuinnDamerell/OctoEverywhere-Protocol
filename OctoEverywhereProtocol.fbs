@@ -19,6 +19,11 @@ enum PathTypes:byte { None=0, Relative=1, Absolute=2 }
 // The ordering is weird to match the websocket standard.
 enum WebSocketDataTypes:byte { Text=1, Binary=2, Close=8, None=126}
 
+// Indicates if the stream is allowed to use the OctoEverywher Auth Token.
+// We use a byte here instead of a bool to strongly type the value to prevent
+// mixups with a simple bool
+enum OeAuthAllowed:byte { Deny=0, Allow=1 }
+
 // Possible levels of notifications.
 // Notice is yellow
 // Info is ugly blue
@@ -60,7 +65,7 @@ table HttpInitialContext {
 
   // Optional - A speical flag, if set, the plugin will use the OE app auth key for the request.
   // Note that some pluigns will never generate an auth key, so this might always fail on them.
-  use_octoeverywhere_auth:bool = false;
+  use_octoeverywhere_auth:OeAuthAllowed = Deny;
 }
 
 
