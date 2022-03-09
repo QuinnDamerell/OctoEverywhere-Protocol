@@ -103,6 +103,14 @@ table HandshakeSyn {
 
   // The key version this client is using and is expecting to use for decryption.
   ras_challenge_version:byte;
+
+  // The following settings are optional. These settings indicate the current webcam setup at the time
+  // the websocket is connected. Normally we pull these values from the settings json, but to improve the
+  // first time user experance we will also include them here, so the dashboard webcam image is setup right before
+  // first connect.
+  webcam_flip_h:bool = false;
+  webcam_flip_v:bool = false;
+  webcam_flip_rotate_90:bool = false;
 }
 
 // A message that's sent in response to the handshake sync. The connection isn't established
