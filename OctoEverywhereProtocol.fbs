@@ -111,6 +111,11 @@ table HandshakeSyn {
   webcam_flip_h:bool = false;
   webcam_flip_v:bool = false;
   webcam_flip_rotate_90:bool = false;
+
+  // A private key that's tied to the printer id. This key is generated and private to the plugin and is not used elsewhere on the OE website.
+  // This key is only used to authencate the printer to the service. Since it's not well known, this ensures only this plugin can connect to the service
+  // asserting the given printer id.
+  private_key:string;
 }
 
 // A message that's sent in response to the handshake sync. The connection isn't established
