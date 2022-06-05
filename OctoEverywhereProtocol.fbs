@@ -116,6 +116,9 @@ table HandshakeSyn {
   // This key is only used to authencate the printer to the service. Since it's not well known, this ensures only this plugin can connect to the service
   // asserting the given printer id.
   private_key:string;
+
+  // Optional - This value that specifies the method the summon request was made with, if this connection was due to a summon.
+  summon_method:string;
 }
 
 // A message that's sent in response to the handshake sync. The connection isn't established
@@ -164,6 +167,9 @@ table OctoNotification {
 table OctoSummon {
   // The absolute URL of the server that's requesting a connection.
   server_connect_url:string;
+
+  // The method that was used to summon the printer.
+  summon_method:string;
 }
 
 // The core message used to stream bi-directionally stream data. This stream system is used for
