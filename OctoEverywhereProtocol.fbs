@@ -34,6 +34,9 @@ enum OctoNotificationTypes:byte { Notice=0, Info=1, Success=2, Error=3 }
 // Possible message priority types.
 enum MessagePriority:byte { Critical=1, High=5, Normal=10, Low=15, Background=20 }
 
+// Summon Methods.
+enum SummonMethods:byte { Unknown=1, FastPath=2, Broadcast=3 }
+
 
 
 //
@@ -118,7 +121,7 @@ table HandshakeSyn {
   private_key:string;
 
   // Optional - This value that specifies the method the summon request was made with, if this connection was due to a summon.
-  summon_method:string;
+  summon_method:SummonMethods = Unknown;
 }
 
 // A message that's sent in response to the handshake sync. The connection isn't established
@@ -169,7 +172,7 @@ table OctoSummon {
   server_connect_url:string;
 
   // The method that was used to summon the printer.
-  summon_method:string;
+  summon_method:SummonMethods = Unknown;
 }
 
 // The core message used to stream bi-directionally stream data. This stream system is used for
