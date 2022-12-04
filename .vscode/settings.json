@@ -10,5 +10,9 @@
         "Proto",
         "ulong",
         "websockets"
+    ],
+    "cSpell.enabled": true,
+    "cSpell.enableFiletypes": [
+        "flatbuffers"
     ]
 }

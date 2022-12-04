@@ -19,7 +19,7 @@ enum PathTypes:byte { None=0, Relative=1, Absolute=2 }
 // The ordering is weird to match the websocket standard.
 enum WebSocketDataTypes:byte { Text=1, Binary=2, Close=8, None=126}
 
-// Indicates if the stream is allowed to use the OctoEverywher Auth Token.
+// Indicates if the stream is allowed to use the OctoEverywhere Auth Token.
 // We use a byte here instead of a bool to strongly type the value to prevent
 // mixups with a simple bool
 enum OeAuthAllowed:byte { Deny=0, Allow=1 }
@@ -34,6 +34,8 @@ enum OctoNotificationTypes:byte { Notice=0, Info=1, Success=2, Error=3 }
 // Possible message priority types.
 enum MessagePriority:byte { Critical=1, High=5, Normal=10, Low=15, Background=20 }
 
+// Defines which type of summon was requested. Used for telemetry on the server.
+enum SummonMethods:byte { Unknown=1, FastPath=2, Broadcast=3 }
 
 
 //
@@ -63,8 +65,8 @@ table HttpInitialContext {
   // Optional - Any http headers in the request.
   headers:[HttpHeader];
 
-  // Optional - A speical flag, if set, the plugin will use the OE app auth key for the request.
-  // Note that some pluigns will never generate an auth key, so this might always fail on them.
+  // Optional - A special flag, if set, the plugin will use the OE app auth key for the request.
+  // Note that some plugins will never generate an auth key, so this might always fail on them.
   use_octoeverywhere_auth:OeAuthAllowed = Deny;
 }
 
@@ -94,7 +96,7 @@ table HandshakeSyn {
   // If known, this is the port the local http proxy is running on.
   local_http_proxy_port:uint;
 
-  // A not secrete but harder to know key to ensure the pritner id identiy.
+  // A not secrete but harder to know key to ensure the printer id identity.
   key:string;
 
   // A RSA challenge that will allow the client to validate it's talking to an authentic server.
@@ -106,11 +108,18 @@ table HandshakeSyn {
 
   // The following settings are optional. These settings indicate the current webcam setup at the time
   // the websocket is connected. Normally we pull these values from the settings json, but to improve the
-  // first time user experance we will also include them here, so the dashboard webcam image is setup right before
+  // first time user experience we will also include them here, so the dashboard webcam image is setup right before
   // first connect.
   webcam_flip_h:bool = false;
   webcam_flip_v:bool = false;
   webcam_flip_rotate_90:bool = false;
+
+  // A private key associated to this printer id. Once it's set by plugin, it must be supplied on all connections to allow the
+  // connection. This prevents incorrect clients from trying to connect as this OctoPrint instance.
+  private_key:string;
+
+  // Optional - If the connection is due to a summon, this indicates which type.
+  summon_method:SummonMethods = Unknown;
 }
 
 // A message that's sent in response to the handshake sync. The connection isn't established
@@ -135,7 +144,7 @@ table HandshakeAck {
   // The active OctoKey
   octokey:string;
 
-  // The returned decrypted RSA challenge phrase. The decryption is done with the server's private key that only OctoEverywher services know.
+  // The returned decrypted RSA challenge phrase. The decryption is done with the server's private key that only OctoEverywhere services know.
   rsa_challenge_result:string;
 }
 
@@ -159,6 +168,9 @@ table OctoNotification {
 table OctoSummon {
   // The absolute URL of the server that's requesting a connection.
   server_connect_url:string;
+
+  // Indicates which summon type was used, so the connecting server can know.
+  summon_method:SummonMethods = Unknown;
 }
 
 // The core message used to stream bi-directionally stream data. This stream system is used for
@@ -207,6 +219,10 @@ table WebStreamMsg {
   // Optional - If the message priority is defined, it might be considered when processing messages.
   // This is mostly used to make sure that important page elements that the user sees first load the fastest.
   msg_priority:MessagePriority = Normal;
+
+  // If set, this indicates that the request failed due to a connection failure from the plugin to the requested URL.
+  // This allows us to differentiate between connection errors and plugin errors.
+  close_due_to_request_connection_failure:bool = false;
 }
 
 // Holds all possible types of messages.
