@@ -1,8 +1,7 @@
 // The namepspace must start the same as our python package. That's because
 // we bundle the output directly with the package. Some of the classes (like WebStreamMgs)
 // reference the namespace in the generated logic, and it will break if it doesn't match.
-namespace octoprint_octoeverywhere.Proto;
-
+namespace octoeverywhere.Proto;
 
 
 //
@@ -36,6 +35,9 @@ enum MessagePriority:byte { Critical=1, High=5, Normal=10, Low=15, Background=20
 
 // Defines which type of summon was requested. Used for telemetry on the server.
 enum SummonMethods:byte { Unknown=1, FastPath=2, Broadcast=3 }
+
+// Defines different server host types that this plugin can be setup on.
+enum ServerHost:byte { Unknown=0, OctoPrint=1, Moonraker=2 }
 
 
 //
@@ -120,6 +122,9 @@ table HandshakeSyn {
 
   // Optional - If the connection is due to a summon, this indicates which type.
   summon_method:SummonMethods = Unknown;
+
+  // Specifies the type of server that this plugin is setup with.
+  server_host:ServerHost = Unknown;
 }
 
 // A message that's sent in response to the handshake sync. The connection isn't established

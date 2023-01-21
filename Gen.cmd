@@ -10,6 +10,6 @@ del /S /Q py\*
 mkdir py
 pushd py
 ..\flatc_build\flatc.exe --python ..\OctoEverywhereProtocol.fbs
-del /S /Q ..\..\OctoPrint-OctoEverywhere\octoprint_octoeverywhere\Proto\*
-xcopy .\octoprint_octoeverywhere\Proto\ ..\..\OctoPrint-OctoEverywhere\octoprint_octoeverywhere\Proto\ /E/H
+del /S /Q ..\..\OctoPrint-OctoEverywhere\octoeverywhere\Proto\*
+xcopy .\octoeverywhere\Proto\ ..\..\OctoPrint-OctoEverywhere\octoeverywhere\Proto\ /E/H
 popd
