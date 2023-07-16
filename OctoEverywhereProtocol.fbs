@@ -164,8 +164,15 @@ table OctoNotification {
   // The type of notification
   type:OctoNotificationTypes = Notice;
 
-  // Indicates if the pop-up should auto hide
+  // Deprecated - Indicates if the pop-up should auto hide
   auto_hide:bool;
+
+  // Indicates how long the notification should be shown for. A time of 0 means no auto-hide.
+  show_for_sec:uint32 = 5;
+
+  // Indicates if the notification should only be shown if the user's portal is loaded on OE.
+  // For example, if the user has two browsers open, one local, one via oe, it will only show on the oe browser if set.
+  show_only_if_loaded_from_oe:bool = true;
 }
 
 // A message that is sent to clients when they are trying to be summoned by another server.
