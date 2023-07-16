@@ -165,7 +165,7 @@ table OctoNotification {
   type:OctoNotificationTypes = Notice;
 
   // Deprecated - Indicates if the pop-up should auto hide
-  auto_hide:bool;
+  auto_hide:bool (deprecated);
 
   // Indicates how long the notification should be shown for. A time of 0 means no auto-hide.
   show_for_sec:uint32 = 5;
