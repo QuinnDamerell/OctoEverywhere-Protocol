@@ -241,6 +241,12 @@ table WebStreamMsg {
   // If set, this indicates that the request failed due to a connection failure from the plugin to the requested URL.
   // This allows us to differentiate between connection errors and plugin errors.
   close_due_to_request_connection_failure:bool = false;
+
+  // Perf metrics that are optionally added.
+  // These are intended to be sent by the plugin, right now they are only send for multipart streams.
+  body_read_time_high_water_mark_ms:uint16 = 0;
+  socket_send_time_high_water_mark_ms:uint16 = 0;
+  multipart_reads_per_second:uint8 = 0;
 }
 
 // Holds all possible types of messages.
