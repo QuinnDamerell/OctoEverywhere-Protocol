@@ -125,6 +125,9 @@ table HandshakeSyn {
 
   // Specifies the type of server that this plugin is setup with.
   server_host:ServerHost = Unknown;
+
+  // Specifies if this plugin is in companion mode, aka it's not running on the local moonraker device, it's running somewhere else on the LAN.
+  is_companion:bool = false;
 }
 
 // A message that's sent in response to the handshake sync. The connection isn't established
