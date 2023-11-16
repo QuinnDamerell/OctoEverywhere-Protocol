@@ -39,6 +39,10 @@ enum SummonMethods:byte { Unknown=1, FastPath=2, Broadcast=3 }
 // Defines different server host types that this plugin can be setup on.
 enum ServerHost:byte { Unknown=0, OctoPrint=1, Moonraker=2 }
 
+// Defines different OS types the plugin can be installed on.
+// Note that these are mostly used to know if system can self update or not.
+enum OsType:byte { Unknown=0, Debian=1, Windows=2, CrealitySonicPad=3, CrealityK1=4 }
+
 
 //
 // Helper Tables
@@ -128,6 +132,9 @@ table HandshakeSyn {
 
   // Specifies if this plugin is in companion mode, aka it's not running on the local moonraker device, it's running somewhere else on the LAN.
   is_companion:bool = false;
+
+  // Specifies which OS type the plugin is running on. Right now, it's only used for Klipper installs.
+  os_type:OsType = Unknown;
 }
 
 // A message that's sent in response to the handshake sync. The connection isn't established
