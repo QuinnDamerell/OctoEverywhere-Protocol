@@ -9,7 +9,7 @@ popd
 del /S /Q py\*
 mkdir py
 pushd py
-..\flatc_build\flatc.exe --python ..\OctoEverywhereProtocol.fbs
+..\flatc_build\flatc.exe --python-typing --python ..\OctoEverywhereProtocol.fbs
 del /S /Q ..\..\OctoPrint-OctoEverywhere\octoeverywhere\Proto\*
 xcopy .\octoeverywhere\Proto\ ..\..\OctoPrint-OctoEverywhere\octoeverywhere\Proto\ /E/H
 popd
