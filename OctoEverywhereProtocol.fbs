@@ -135,6 +135,10 @@ table HandshakeSyn {
 
   // Specifies which OS type the plugin is running on. Right now, it's only used for Klipper installs.
   os_type:OsType = Unknown;
+
+  // Specifies which type of compression the client wants for receiving data (other than None). Note that the client can send different types per stream.
+  // This defaults to zlib, because all clients must support at least zlib. But ideally they use zstandard if they can.
+  receive_compression_type:DataCompression = Zlib;
 }
 
 // A message that's sent in response to the handshake sync. The connection isn't established
