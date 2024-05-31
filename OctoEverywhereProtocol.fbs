@@ -9,7 +9,7 @@ namespace octoeverywhere.Proto;
 //
 
 // Indicates what type of compression is used for the data, if any.
-enum DataCompression:byte { None = 0, Brotli=1, Zlib=2 }
+enum DataCompression:byte { None = 0, Brotli=1, Zlib=2, ZStandard=3  }
 
 // Possible types of paths.
 enum PathTypes:byte { None=0, Relative=1, Absolute=2 }
