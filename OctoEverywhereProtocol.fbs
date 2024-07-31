@@ -139,6 +139,10 @@ table HandshakeSyn {
   // Specifies which type of compression the client wants for receiving data (other than None). Note that the client can send different types per stream.
   // This defaults to zlib, because all clients must support at least zlib. But ideally they use zstandard if they can.
   receive_compression_type:DataCompression = Zlib;
+
+  // Specifies a per device unique ID. This is used to prevent backed-up printer IDs from being duplicated.
+  // This can be None if the OS doesn't support a unique device ID.
+  device_id:string;
 }
 
 // A message that's sent in response to the handshake sync. The connection isn't established
