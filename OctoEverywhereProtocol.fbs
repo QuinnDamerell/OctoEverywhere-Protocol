@@ -169,6 +169,9 @@ table HandshakeAck {
 
   // The returned decrypted RSA challenge phrase. The decryption is done with the server's private key that only OctoEverywhere services know.
   rsa_challenge_result:string;
+
+  // If set, the plugin must rekey and restart.
+  requires_rekey:bool = false;
 }
 
 // A message that pops up a notification on the user's OctoPrint UI.
