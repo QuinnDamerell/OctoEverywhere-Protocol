@@ -37,7 +37,7 @@ enum MessagePriority:byte { Critical=1, High=5, Normal=10, Low=15, Background=20
 enum SummonMethods:byte { Unknown=1, FastPath=2, Broadcast=3 }
 
 // Defines different server host types that this plugin can be setup on.
-enum ServerHost:byte { Unknown=0, OctoPrint=1, Moonraker=2, Bambu=3, ElegooOs=4 }
+enum ServerHost:byte { Unknown=0, OctoPrint=1, Moonraker=2, Bambu=3, Elegoo=4 }
 
 // Defines different OS types the plugin can be installed on.
 // Note that these are mostly used to know if system can self update or not.
