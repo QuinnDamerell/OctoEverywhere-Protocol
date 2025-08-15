@@ -130,7 +130,7 @@ table HandshakeSyn {
   // Specifies the type of server that this plugin is setup with.
   server_host:ServerHost = Unknown;
 
-  // Specifies if this plugin is in companion mode, aka it's not running on the local moonraker device, it's running somewhere else on the LAN.
+  // Specifies if this plugin is in companion mode.
   is_companion:bool = false;
 
   // Specifies which OS type the plugin is running on. Right now, it's only used for Klipper installs.
@@ -143,6 +143,9 @@ table HandshakeSyn {
   // Specifies a per device unique ID. This is used to prevent backed-up printer IDs from being duplicated.
   // This can be None if the OS doesn't support a unique device ID.
   device_id:string;
+
+  // Specifies if this plugin is running in a docker container.
+  is_docker_container:bool = false;
 }
 
 // A message that's sent in response to the handshake sync. The connection isn't established
