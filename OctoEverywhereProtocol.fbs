@@ -74,6 +74,9 @@ table HttpInitialContext {
   // Optional - A special flag, if set, the plugin will use the OE app auth key for the request.
   // Note that some plugins will never generate an auth key, so this might always fail on them.
   use_octoeverywhere_auth:OeAuthAllowed = Deny;
+
+  // Optional - The IP address the request was originally from.
+  forwarded_for_ip:string;
 }
 
 
