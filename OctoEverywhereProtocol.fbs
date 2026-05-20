@@ -54,6 +54,12 @@ table HttpHeader {
   value:string;
 }
 
+// Represents an random property
+table Property {
+  key:string;
+  str_value:string;
+}
+
 // Represents context for http calls that only needs to be sent on the initial request.
 table HttpInitialContext {
   // The url path of the request - or - an absolute  URL.
@@ -149,6 +155,9 @@ table HandshakeSyn {
 
   // Specifies if this plugin is running in a docker container.
   is_docker_container:bool = false;
+
+  // Optional - Any other properties.
+  properties:[Property];
 }
 
 // A message that's sent in response to the handshake sync. The connection isn't established
